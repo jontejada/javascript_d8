@@ -3,6 +3,19 @@ These are the inheritance-free exercises to introduce OOP.
 
 [Slides Link](http://slides.com/lizh/oop)
 
+## Cheatsheet
+
+Make a new Class:
+```javascript
+var Classname = function(){};
+```
+
+Make a Method:
+```javascript
+Classname.prototype.methodName = function() {};
+```
+
+
 # Exercises
 
 ## Objectives:
