@@ -68,5 +68,6 @@ Pick one of three games: Chess, Poker, or Roshambo (rock, paper, scissors). Rosh
 	* Players should keep track of their pieces, cards, or hands
 * You should have a class for each **Piece**, **Card** or **Move**
 
+We don't want our **Players** to be able to change their number of wins or losses, so we should hide those behind Getters and Setters, and make those properties *private*. We also don't want Games to advance turns until all players are ready, so we should make some of the methods here *private* too, but you're going to have to figure that part out yourself.
 It's up to you to do the rest of the design for this program! Ensure two players can be created in the console as classes, join a game, execute methods with moves, and one player can win each game.
 
