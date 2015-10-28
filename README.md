@@ -1,6 +1,8 @@
 # Intro to JS Classes
 These are the inheritance-free exercises to introduce OOP.
 
+[Slides Link](http://slides.com/lizh/oop)
+
 # Exercises
 
 ## Objectives:
