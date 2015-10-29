@@ -75,3 +75,9 @@ BookList.prototype.finishCurrentBook = function () {
     }
     
 };
+
+/*
+var shelf = new BookList()
+shelf.add(lorax);shelf.add(eloquent);shelf.add(good);shelf.add(martian);shelf.add(why);shelf.add(survivor);
+
+*/
