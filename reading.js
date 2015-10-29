@@ -1,4 +1,4 @@
-
+//new class that builds a Book from 5 inputs
 var Book = function(title,genre,author,read,readDate) {
 	this.title = title;
 	this.genre = genre;
@@ -25,7 +25,7 @@ var why = new Book ("Why Not Me", "non-fiction", "Mindy Kaling", false, "");
 var survivor = new Book ("The Survivor", "fiction", "Mitch Rapp", false, "");
 
 
-
+//new class that builds a mostly empty BookList
 var BookList = function () {
     this.booksRead = 0;
     this.booksUnread = 0;
@@ -35,6 +35,7 @@ var BookList = function () {
     this.books = [];
 };
 
+//method for BookList that adds a single book
 BookList.prototype.add = function(book) {
     //add a book to the booklist
     this.books.push(book);
@@ -53,6 +54,7 @@ BookList.prototype.add = function(book) {
     }
 };
 
+//method
 BookList.prototype.finishCurrentBook = function () {
     //add to read, subtract from unread
     this.booksRead++;
