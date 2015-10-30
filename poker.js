@@ -13,7 +13,6 @@ function whatSuit(input) {
 		return "Spades";
 	}
 }
-
 //convert index to number name string
 function whatNumber(input) {
 	if (input === 0) {
@@ -56,7 +55,6 @@ function whatNumber(input) {
 		return "King";
 	}
 }
-
 //class that makes a card
 var Card = function(suit,number) {
 	this.suit = suit;
@@ -64,13 +62,11 @@ var Card = function(suit,number) {
 	this.name = whatNumber(number) + " of " + whatSuit(suit);
 };
 
-//makes a test card
-//var threeOfDiamonds = new Card(1,2);
 
 //shuffle work
 var cardOrder = [];
 for (var i = 0 ; i<52 ; i++) {
-	cardOrder[i] = i+1;
+	cardOrder[i] = i;
 }
 function shuffle(array) {
 	var m = array.length, t, i;
@@ -80,12 +76,12 @@ function shuffle(array) {
 		array[m] = array[i];
 		array[i] = t;
 	}
-	//return array;
+	//return array?
 }
 shuffle(cardOrder);
 
 
-//function that fills a deck
+//function that fills a shuffled deck
 var deck = [[],[],[],[]];
 function fillDeck (inputDeck){
 	for (var i=0 ; i<4 ; i++) {
@@ -95,19 +91,53 @@ function fillDeck (inputDeck){
 		}
 	}
 }
-//rebuild previous function into factory
-
 //run function
 fillDeck(deck);
 
+//***need to rebuild previous function into factory!
 
-//asign shuffled card order to the deck
+//class that builds players with a name and an empty hand array
+var Player = function (name) {
+	this.name = name;
+	this.hand = [];
+};
 
+//make 2 new players
+var joe = new Player("Joe");
+var beth = new Player("Beth");
 
+//class that builds a game with two players
+var Game = function (player1, player2) {
+	this.players = [ player1 , player2 ];
+};
 
-//class that builds players
-// var Player = function (name) {
-// 	this.name = name;
-// 	this.hand = 
-// }
+//make a new game
+var poker = new Game(joe,beth);
 
+//deals out 5 cards to all players in the game
+Game.prototype.dealCards = function() {
+    for (var g = 0 ; g<this.players.length ; g++) {
+    	var start = 5 * g;
+	    for (var h=start ; h<start+5 ; h++) {
+	        for (var i=0 ; i<4 ; i++) {
+			    for (var j=0 ; j<13 ; j++) {
+				    if (deck[i][j].position === h) {
+					    this.players[g].hand[h] = deck[i][j];
+			    	}
+		    	}
+	    	}
+	    }
+	}
+};
+
+//test for FLUSH
+Game.prototype.hasFlush = function (whatPlayer) {
+	if(
+		this.players[whatPlayer].hand[1].suit === this.players[whatPlayer].hand[2].suit &&
+		this.players[whatPlayer].hand[1].suit === this.players[whatPlayer].hand[3].suit &&
+		this.players[whatPlayer].hand[1].suit === this.players[whatPlayer].hand[4].suit &&
+		this.players[whatPlayer].hand[1].suit === this.players[whatPlayer].hand[5].suit
+		) {
+		return true;
+	} else { return false };
+};

@@ -1,8 +1,11 @@
 //class that builds players
 var Player = function (name) {
+	var wins = 0;
 	this.name = name; 
 	this.move = "";
-	this.wins = 0;
+	this.wins = function() {
+	  return wins;	
+	};
 	this.losses = 0;
 };
 
@@ -60,7 +63,6 @@ Game.prototype.play = function() {
 
 
 
-//separate function that finds winner?
 
 
 
