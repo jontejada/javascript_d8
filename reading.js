@@ -76,8 +76,13 @@ BookList.prototype.finishCurrentBook = function () {
     
 };
 
-/*
+/* Run these
+
 var shelf = new BookList()
 shelf.add(lorax);shelf.add(eloquent);shelf.add(good);shelf.add(martian);shelf.add(why);shelf.add(survivor);
 
 */
+
+
+
+

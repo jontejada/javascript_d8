@@ -31,9 +31,9 @@ var Card = function(suit,number) {
 //shuffle work
 var cardOrder = [];
 for (var i = 0 ; i<52 ; i++) {
-	cardOrder[i] = i;
+	cardOrder[i] = i; //fills the empty array with ordered list of numbers from 0 to 51
 }
-function shuffle(array) {
+function shuffle(array) { //Fisher–Yates shuffle from http://bost.ocks.org/mike/shuffle/ (don't fully understand this yet, but it works)
 	var m = array.length, t, i;
 	while (m) {
 		i = Math.floor(Math.random() * m--);
@@ -41,7 +41,6 @@ function shuffle(array) {
 		array[m] = array[i];
 		array[i] = t;
 	}
-	//return array?
 }
 shuffle(cardOrder);
 
@@ -59,7 +58,7 @@ function fillDeck (inputDeck){
 //run function
 fillDeck(deck);
 
-//***need to rebuild previous function into factory!
+//todo*rebuild previous function?
 
 //class that builds players with a name and an empty hand array
 var Player = function (name) {
@@ -77,18 +76,18 @@ var Game = function (player1, player2) {
 	this.players = [ player1 , player2 ];
 };
 
-//make a new game
+//start a new game
 var poker = new Game(joe,beth);
 
 //method that deals out 5 cards to all players in the game
 Game.prototype.dealCards = function() {
-    for (var g = 0 ; g<this.players.length ; g++) { //g is player index value: 0 for p1 and 1 for p2
-    	var start = 5 * g; //?
-	    for (var h=start ; h<start+5 ; h++) { //?
-	        for (var i=0 ; i<4 ; i++) { //lopp through each suit 
+    for (var g = 0 ; g<this.players.length ; g++) { //g is player index value: 0 for p1, 1 for p2
+    	var start = 5 * g; //where to start pulling cards from the position array: 0 for p1, 5 for p2
+	    for (var h=start ; h<start+5 ; h++) { //loop through the five cards 
+	        for (var i=0 ; i<4 ; i++) { //loop through each suit 
 			    for (var j=0 ; j<13 ; j++) { //loop through each number 
-				    if (deck[i][j].position === h) {
-					    this.players[g].hand.push (deck[i][j]);
+				    if (deck[i][j].position === h) { //find the appropriate card
+					    this.players[g].hand.push (deck[i][j]); //put that card in the players hand
 			    	}
 		    	}
 	    	}
@@ -99,7 +98,7 @@ Game.prototype.dealCards = function() {
 //deal out the cards
 poker.dealCards();
 
-//test for FLUSH
+//test for flush
 Game.prototype.hasFlush = function (whatPlayer) {
 	if(
 		this.players[whatPlayer].hand[0].suit === this.players[whatPlayer].hand[1].suit &&
@@ -111,14 +110,14 @@ Game.prototype.hasFlush = function (whatPlayer) {
 	} else { return false };
 };
 
-//use these to give p1 a flush for testing
+//use these to give p1 a flush for testing (this is also an ace high straight and a straight flush)
 // poker.players[0].hand[0] = deck[0][0];
 // poker.players[0].hand[1] = deck[0][10];
 // poker.players[0].hand[2] = deck[0][9];
 // poker.players[0].hand[3] = deck[0][12];
 // poker.players[0].hand[4] = deck[0][11];
 
-//fixing the .sort() method so that it orders numerically
+//fixing the .sort() method so that it orders numerically 
 function sortNumber(a,b) {
     return a - b;
 }
@@ -129,19 +128,25 @@ Game.prototype.hasStraight = function(whatPlayer) {
 	for ( var i = 0 ; i < 5 ; i++) { 
 		sortedHand.push(this.players[whatPlayer].hand[i].number); //fill empty sortedHand array with the number value of each card held
 	}
-	sortedHand = sortedHand.sort(sortNumber); //order the array from smallest value to biggest
-	if (sortedHand === [0,9,10,11,12]) { //special case for ace high straight
-	    this.players[whatPlayer].highCard = 13;
+	sortedHand.sort(sortNumber); //order the array from smallest value to biggest
+	if ( //special case for ace high straight
+		sortedHand[0] === 0 &&
+		sortedHand[1] === 9 && 
+		sortedHand[2] === 10 && 
+		sortedHand[3] === 11 && 
+		sortedHand[4] === 12
+	){
+	    this.players[whatPlayer].highCard = 13; //set high card value to one more than king
 	    return true;
-	} else if (
+	} else if ( //for normal straights
 	    sortedHand[4] - sortedHand[3] === 1 && //test for highest card being 1 more than the next highest
-	    sortedHand[3] - sortedHand[2] === 1 && //and so on down the hadn
+	    sortedHand[3] - sortedHand[2] === 1 && //and so on down the hand
 	    sortedHand[2] - sortedHand[1] === 1 &&
 	    sortedHand[1] - sortedHand[0] === 1
-	    ) {
+	) {
 		this.players[whatPlayer].highCard = sortedHand[4];
 		return true;
-	} else { return false };
+	} else { return false }; //no straight
 };
 
 //use these to give p1 a straight for testing
@@ -153,7 +158,7 @@ Game.prototype.hasStraight = function(whatPlayer) {
 
 //test for straight flush
 Game.prototype.hasStraightFlush = function(whatPlayer) {
-	if (this.hasStraight(whatPlayer) && this.hasFlush(whatPlayer)) {
+	if (this.hasStraight(whatPlayer) && this.hasFlush(whatPlayer)) { //test for a straight and a flush
 		return true;
 	} else {return false}
 };
@@ -166,4 +171,14 @@ Game.prototype.hasStraightFlush = function(whatPlayer) {
 // poker.players[0].hand[4] = deck[0][5];
 
 
-//
+//test for four of a kind VERY INCOMPLETE
+Game.prototype.hasFourOfAKind = function(whatPlayer) {
+	var a = [];
+	for ( var i = 0 ; i < 13 ; i++) {
+		for (var j = 0 ; j < 5 ; j++) {
+		    if ( poker.players[whatPlayer].hand[j].number === i) {
+		        
+		    }
+		}
+	}
+};

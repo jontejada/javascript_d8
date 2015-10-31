@@ -63,7 +63,6 @@ Game.prototype.play = function() {
 
 //todo*make options for computer vs person and person vs person
 
-//todo*multiplayer?
 
 
 
