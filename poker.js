@@ -1,59 +1,25 @@
 //convert index to suit name string
 function whatSuit(input) {
-	if (input === 0) {
-		return "Clubs";
-	}
-	if (input === 1) {
-		return "Diamonds";
-	}
-	if (input === 2) {
-		return "Hearts";
-	}
-	if (input === 3) {
-		return "Spades";
-	}
+	if (input === 0) { return "Clubs"; }
+	if (input === 1) { return "Diamonds"; }
+	if (input === 2) { return "Hearts"; }
+	if (input === 3) { return "Spades"; }
 }
 //convert index to number name string
 function whatNumber(input) {
-	if (input === 0) {
-		return "Ace";
-	}
-	if (input === 1) {
-		return "2";
-	}
-	if (input === 2) {
-		return "3";
-	}
-	if (input === 3) {
-		return "4";
-	}
-	if (input === 4) {
-		return "5";
-	}
-	if (input === 5) {
-		return "6";
-	}
-	if (input === 6) {
-		return "7";
-	}
-	if (input === 7) {
-		return "8";
-	}
-	if (input === 8) {
-		return "9";
-	}
-	if (input === 9) {
-		return "10";
-	}
-	if (input === 10) {
-		return "Jack";
-	}
-	if (input === 11) {
-		return "Queen";
-	}
-	if (input === 12) {
-		return "King";
-	}
+	if (input === 0) { return "Ace"; }
+	if (input === 1) { return "2"; }
+	if (input === 2) { return "3"; }
+	if (input === 3) { return "4"; }
+	if (input === 4) { return "5"; }
+	if (input === 5) { return "6"; }
+	if (input === 6) { return "7"; }
+	if (input === 7) { return "8"; }
+	if (input === 8) { return "9"; }
+	if (input === 9) { return "10"; }
+	if (input === 10) { return "Jack"; }
+	if (input === 11) {	return "Queen"; }
+	if (input === 12) { return "King"; }
 }
 //class that makes a card
 var Card = function(suit,number) {
@@ -114,7 +80,7 @@ var Game = function (player1, player2) {
 //make a new game
 var poker = new Game(joe,beth);
 
-//deals out 5 cards to all players in the game
+//method that deals out 5 cards to all players in the game
 Game.prototype.dealCards = function() {
     for (var g = 0 ; g<this.players.length ; g++) { //g is player index value: 0 for p1 and 1 for p2
     	var start = 5 * g; //?
@@ -130,6 +96,9 @@ Game.prototype.dealCards = function() {
 	}
 };
 
+//deal out the cards
+poker.dealCards();
+
 //test for FLUSH
 Game.prototype.hasFlush = function (whatPlayer) {
 	if(
@@ -143,11 +112,16 @@ Game.prototype.hasFlush = function (whatPlayer) {
 };
 
 //use these to give p1 a flush for testing
-poker.players[0].hand[0] = deck[0][0];
-poker.players[0].hand[1] = deck[0][10];
-poker.players[0].hand[2] = deck[0][9];
-poker.players[0].hand[3] = deck[0][12];
-poker.players[0].hand[4] = deck[0][11];
+// poker.players[0].hand[0] = deck[0][0];
+// poker.players[0].hand[1] = deck[0][10];
+// poker.players[0].hand[2] = deck[0][9];
+// poker.players[0].hand[3] = deck[0][12];
+// poker.players[0].hand[4] = deck[0][11];
+
+//fixing the .sort() method so that it orders numerically
+function sortNumber(a,b) {
+    return a - b;
+}
 
 //test for straight
 Game.prototype.hasStraight = function(whatPlayer) {
@@ -155,7 +129,7 @@ Game.prototype.hasStraight = function(whatPlayer) {
 	for ( var i = 0 ; i < 5 ; i++) { 
 		sortedHand.push(this.players[whatPlayer].hand[i].number); //fill empty sortedHand array with the number value of each card held
 	}
-	sortedHand = sortedHand.sort(); //order the array from smallest value to biggest
+	sortedHand = sortedHand.sort(sortNumber); //order the array from smallest value to biggest
 	if (sortedHand === [0,9,10,11,12]) { //special case for ace high straight
 	    this.players[whatPlayer].highCard = 13;
 	    return true;
