@@ -29,6 +29,7 @@ Made a new class and methods for it
 
 - [five card draw](https://en.wikipedia.org/wiki/Five-card_draw) poker game
 - two player (incomplete multiplayer)
+- deck of cards is a 2D array of card objects: [ [clubs] , [diamonds] , [hearts] , [spades] ] , where [clubs] = [ {ace} , {2} , {3} , {4} , {5} , {6} , {7} , {8} , {9} , {10} , {J} , {Q} , {K} ]
 
 
 ##sorting.js
