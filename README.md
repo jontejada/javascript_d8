@@ -32,6 +32,8 @@ Made a new class and methods for it
 - deck of cards is a 2D array of card objects: [ [clubs] , [diamonds] , [hearts] , [spades] ] , where [clubs] = [ {ace} , {2} , {3} , {4} , {5} , {6} , {7} , {8} , {9} , {10} , {J} , {Q} , {K} ]
 
 
+
+
 ##sorting.js
 - content from sorting issue in poker.js
 - makes a `sortNumber(a,b)` function that is passed as the input for sort() when you want to numerically sort an array of numbers 
