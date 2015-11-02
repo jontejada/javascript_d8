@@ -1,5 +1,5 @@
 /*
-notes from 
+my notes from this post about javascript constructors / prototype chain
 http://blog.pivotal.io/labs/labs/javascript-constructors-prototypes-and-the-new-keyword
 */
 
@@ -51,9 +51,42 @@ hp.finished(); //changes hp.read from false to true
 
 
 
+//Subclassing
 
 
+/*
+create/clone
+when you don't want classes
+when you want one object to inherit the properties of another but be able to override them
+*/
 
+function create(parent) {
+    var F = function() {};
+    F.prototype = parent;
+    return new F();
+}
 
+var masterObject = {a:"masterObject value"};
+
+var obj1 = create(masterObject);
+var obj2 = create(masterObject);
+var obj3 = create(masterObject);
+obj3.a = "overridden value"; //typo here on website
+
+/* these are set:
+obj1.a; //"masterObject value"
+obj2.a; //"masterObject value"
+obj3.a; //"overridden value"
+*/
+
+/* but can be changed with:
+masterObject.a = "new masterObject value"
+*/
+
+/*
+obj1.a; //"new masterObject value"
+obj2.a; //"new masterObject value"
+obj3.a; //"overridden value"
+*/
 
 
